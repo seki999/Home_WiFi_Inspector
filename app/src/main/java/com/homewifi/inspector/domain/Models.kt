@@ -1,7 +1,8 @@
 package com.homewifi.inspector.domain
 
 data class WifiSnapshot(
- val time: Long = System.currentTimeMillis(), val status: String = "等待采样",
+ val time: Long = System.currentTimeMillis(), val networkId:String? = null, val status: String = "等待采样",
+ val transport:String = "未连接", val metered:Boolean = false,
  val ssid: String? = null, val bssid: String? = null, val rssi: Int? = null,
  val frequency: Int? = null, val tx: Int? = null, val rx: Int? = null,
  val standard: String? = null, val security: String? = null,
@@ -22,4 +23,4 @@ interface WifiSource {
  fun scans(): kotlinx.coroutines.flow.Flow<ScanState>
  fun requestScan(): String
 }
-interface NetworkTester { suspend fun tcp(host: String, port: Int, attempts: Int = 5): List<Probe>; suspend fun dns(host: String): Pair<List<String>, Double> }
+interface NetworkTester { suspend fun tcp(host: String, port: Int, attempts: Int = 5): List<Probe>; suspend fun dns(host: String): Pair<List<String>, Double>; suspend fun https(host:String):HttpsProbe; suspend fun gatewayPing(host:String):String }

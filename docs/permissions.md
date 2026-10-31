@@ -25,3 +25,6 @@ Android 16 局域网保护为 opt-in，启用时临时使用 NEARBY_WIFI_DEVICES
 - https://developer.android.com/build/releases/agp-8-7-0-release-notes
 
 AGP 8.7 官方最高 API35，要求 Gradle8.9/JDK17；本版固定此已安装兼容链。更高版本迁移属于明确待办。
+
+
+0.3.0：位置权限另用于用户主动请求的本机前台一次定位。大致位置权限即可尝试系统定位，Wi-Fi扫描仍要求精确位置与定位开关。拒绝定位不妨碍移动网络等DNS/TCP/HTTPS/下载检测。无ACCESS_BACKGROUND_LOCATION。定位15秒超时并取消系统请求；不自动/后台周期采集。API31+网络回调使用FLAG_INCLUDE_LOCATION_INFO，但读取SSID/BSSID仍明确检查当前精确位置权限和定位服务状态，避免旧缓存脱敏失效。
